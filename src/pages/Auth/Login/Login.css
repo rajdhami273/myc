@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  overflow: scroll;
+}
+form {
+  width: 100%;
+}
+.login-box {
+  width: 100%;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-decoration: underline;
+  color: black;
+}

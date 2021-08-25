@@ -1,0 +1,26 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px;
+  text-align: start;
+}
+label {
+  font-size: 12px;
+}
+.form-input {
+  border-color: transparent;
+  outline: none;
+  height: 30px;
+  transition: all 0.5s ease;
+  border-bottom-color: #f2f2f2;
+  font-size: 18px;
+}
+.form-input:focus {
+  border-bottom-color: teal;
+}
+.error-text {
+  height: inherit;
+  color: red;
+  font-size: 12px;
+}
