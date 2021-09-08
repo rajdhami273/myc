@@ -10,5 +10,5 @@ function App() {
     </AppProvider>
   );
 }
-console.log(<h1>{"Hello"}</h1>);
+// console.log(<h1>{"Hello"}</h1>);
 export default App;

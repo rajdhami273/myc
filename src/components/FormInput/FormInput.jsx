@@ -16,6 +16,7 @@ export default function FormInput({
   ref,
   id,
   hideError,
+  onKeyPress,
 }) {
   return (
     <div className="form-group">
@@ -33,6 +34,7 @@ export default function FormInput({
         required={required}
         readOnly={readOnly}
         ref={ref}
+        onKeyPress={(e) => (onKeyPress ? onKeyPress(e) : () => {})}
       />
       {!hideError && <div className="error-text">{error}&nbsp;</div>}
     </div>

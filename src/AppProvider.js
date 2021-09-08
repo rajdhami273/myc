@@ -33,7 +33,7 @@ export default function AppProvider(props) {
       addAxiosErrorMessage(error);
     }
   }
-
+/* eslint-disable */
   useEffect(() => {
     localStorage.getItem("authToken") && getuserDetails();
   }, []);

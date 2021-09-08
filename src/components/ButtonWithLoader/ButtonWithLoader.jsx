@@ -9,6 +9,7 @@ export default function ButtonWithLoader({
   className,
 }) {
   return (
+    /* eslint-disable */
     <button
       className={"btn" + " " + className}
       type={type}

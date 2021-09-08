@@ -13,7 +13,6 @@ export default function Chat(props) {
   const [chats, setChats] = useState([]);
   const [gettingChats, setGettingChats] = useState(false);
   async function getChats() {
-    setGettingChats(true);
     try {
       const res = await http.get("/chat/all");
       if (res.data) {
@@ -30,7 +29,7 @@ export default function Chat(props) {
   const [message, setMessage] = useState("");
   async function sendMessage() {
     if (!message) return;
-    setGettingChats(true);
+    // setGettingChats(true);
     try {
       const res = await http.post("/chat/add-message", { message });
       if (res.data) {
@@ -54,12 +53,14 @@ export default function Chat(props) {
   }
   useEffect(() => {
     setTimeout(() => {
-      console.log(chatBodyRef);
+      // console.log(chatBodyRef);
       scrollToBottomOfChatBody();
     }, 0);
   }, [chats]);
 
+  /* eslint-disable */
   useEffect(() => {
+    setGettingChats(true);
     getChats();
   }, []);
 
@@ -69,7 +70,7 @@ export default function Chat(props) {
     socketRef.current.on("connect", () => {
       console.log("I am listening live...");
     });
-    console.log(socketRef.current);
+    // console.log(socketRef.current);
     // socketRef.current?.emit("new-message", "messsage new");
     socketRef.current?.on("new-message", (data) => {
       getChats();
@@ -87,31 +88,39 @@ export default function Chat(props) {
   return (
     <div className="chat-container">
       <div className="chat-body" ref={chatBodyRef}>
-        {chats.map((item) => {
-          const { _id, message, userDetails, messageBy, createdAt } = item;
-          return (
-            <div
-              className={
-                "message-box " + (userData._id === messageBy ? "right" : "left")
-              }
-              key={_id}
-            >
-              <div className="message-head">
-                <div className="sender-name">
-                  {userDetails.name || "Stranger"}
+        {gettingChats ? (
+          <ButtonWithLoader />
+        ) : (
+          chats.map((item) => {
+            const { _id, message, userDetails, messageBy, createdAt } = item;
+            return (
+              <div
+                className={
+                  "message-box " +
+                  (userData._id === messageBy ? "right" : "left")
+                }
+                key={_id}
+              >
+                <div className="message-head">
+                  <div className="sender-name">
+                    {userDetails.name || "Stranger"}
+                  </div>
+                  <div className="send-time">{moment(createdAt).fromNow()}</div>
                 </div>
-                <div className="send-time">{moment(createdAt).fromNow()}</div>
+                {message}
               </div>
-              {message}
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
 
       <div className="chat-footer">
         <FormInput
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") sendMessage();
+          }}
           placeholder={"Write here..."}
           hideError
         />

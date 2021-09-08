@@ -14,14 +14,22 @@ export default function Register(props) {
   const { addAxiosErrorMessage, getuserDetails } = useContext(AppContext);
   //   const history = useHistory();
   const registerValidationSchema = Yup.object().shape({
-    name: Yup.string().label("name").requiredCustom(""),
+    name: Yup.string().label("Name").requiredCustom(""),
     email: Yup.string()
-      .label("email")
+      .label("Email")
       .email("Enter valid email")
       .requiredCustom(""),
     username: Yup.string().label("username").requiredCustom(""),
     password: Yup.string().label("password").requiredCustom(""),
-    confirmPassword: Yup.string().label("confirmPassword").requiredCustom(""),
+    confirmPassword: Yup.string()
+      .nullable()
+      .label("Confirm password")
+      .requiredCustom("")
+      .password("")
+      .oneOf(
+        [Yup.ref("password")],
+        "Password and Confirm password do not match"
+      ),
   });
 
   const history = useHistory();
