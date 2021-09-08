@@ -14,7 +14,8 @@ export default function FormInput({
   required,
   readOnly,
   ref,
-  id
+  id,
+  hideError,
 }) {
   return (
     <div className="form-group">
@@ -33,7 +34,7 @@ export default function FormInput({
         readOnly={readOnly}
         ref={ref}
       />
-      <div className="error-text">{error}&nbsp;</div>
+      {!hideError && <div className="error-text">{error}&nbsp;</div>}
     </div>
   );
 }

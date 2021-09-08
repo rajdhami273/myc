@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import ErrorPopup from "./components/ErrorPopup/ErrorPopup";
 import http from "./services/http";
 
@@ -26,13 +26,17 @@ export default function AppProvider(props) {
     try {
       const res = await http.get("/user/me");
       if (res.data) {
-        console.log(res.data)
+        console.log(res.data);
         setUserData(res.data);
       }
     } catch (error) {
       addAxiosErrorMessage(error);
     }
   }
+
+  useEffect(() => {
+    localStorage.getItem("authToken") && getuserDetails();
+  }, []);
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
       <AppContext.Provider

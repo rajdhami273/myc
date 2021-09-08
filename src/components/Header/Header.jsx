@@ -6,7 +6,7 @@ export default function Header(props) {
     <div className="header-container">
       <div className="hamburger">
         {new Array(3).fill("").map((item, index) => {
-          return <span className="hamburger-line"></span>;
+          return <span className="hamburger-line" key={index}></span>;
         })}
         {/* &#9776; */}
       </div>

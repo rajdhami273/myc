@@ -50,11 +50,11 @@ export default function Register(props) {
       </div>
       <Formik
         initialValues={{
-          name: "Rajendra Dhami",
-          email: "rajdhami273@gmail.com",
-          username: "raj",
-          password: "123456789",
-          confirmPassword: "123456789",
+          name: "",
+          email: "",
+          username: "",
+          password: "",
+          confirmPassword: "",
         }}
         enableReinitialize={true}
         validateOnBlur={true}

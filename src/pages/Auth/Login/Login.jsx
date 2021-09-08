@@ -46,7 +46,7 @@ export default function Login(props) {
         <h1>Login</h1>
       </div>
       <Formik
-        initialValues={{ user: "raj", password: "12345678" }}
+        initialValues={{ user: "", password: "" }}
         enableReinitialize={true}
         validateOnBlur={true}
         validationSchema={loginValidationSchema}

@@ -12,12 +12,12 @@
   width: 20px;
   height: 20px;
   border: 3px solid white;
-  border-top: transparent;
-  border-right: transparent;
+  border-top: 3px solid transparent;
+  /* border-right: none; */
   border-radius: 50%;
   position: relative;
   /* position: absolute; */
-  animation: rotate 0.3s infinite;
+  animation: rotate 0.6s linear infinite;
 }
 
 @keyframes rotate {

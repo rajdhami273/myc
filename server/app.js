@@ -1,11 +1,28 @@
 const express = require("express");
 const app = express();
+const server = require("http").Server(app);
 const mongoose = require("mongoose");
 const errorlog = require("express-errorlog");
 const cors = require("cors");
 
 app.use(cors({ credentials: true }));
 app.use(errorlog);
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+io.on("connection", (socket) => {
+  console.log("Connected");
+  // console.log(socket);
+  socket.on("disconnect", () => {
+    console.log("Disconnected");
+  });
+  socket.on("new-message", (socket) => {
+    io.emit("new-message");
+  });
+});
 
 mongoose
   .connect(require("./config").serverURL, {
@@ -34,4 +51,4 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Hello to MYC!");
 });
-module.exports = app;
+module.exports = server;
